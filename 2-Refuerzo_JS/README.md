@@ -38,3 +38,6 @@ if(true){
 console.log(nombre)
 ```
 Aqui el resultado solamente sera Peter
+
+# Template string
+En js tenemos 2 maneras de concatenar ya sea con el nombre + apellido o tambien con la interpolacion usando `${nombre} ${apellido}` para mejor visualizacion ver el codigo
