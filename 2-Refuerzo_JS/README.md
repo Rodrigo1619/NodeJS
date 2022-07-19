@@ -41,3 +41,7 @@ Aqui el resultado solamente sera Peter
 
 # Template string
 En js tenemos 2 maneras de concatenar ya sea con el nombre + apellido o tambien con la interpolacion usando `${nombre} ${apellido}` para mejor visualizacion ver el codigo
+
+# Callbacks
+Un callback en resumidas cuentas es una funcion dentro de otra funcion que se ejecutara en alguna parte del tiempo
+O mejor dicho una funcion que se manda como argumento a otra funcion
