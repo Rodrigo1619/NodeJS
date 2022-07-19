@@ -23,7 +23,7 @@ const salarios = [
         salario: 100
     }
 ]
-const id = 1
+const id = 30
 const getEmpleado = (id)=>{
     return new Promise((resolve, reject )=>{
         const empleado = empleados.find(e => e.id === id)?.Nombre
@@ -55,7 +55,7 @@ getSalario(id)
     .then(salario=> console.log(salario))
     .catch(err => console.log(err))*/
 
-getEmpleado(id)
+/*getEmpleado(id)
     .then(empleado=>{
         getSalario(id)
             .then(salario=>{
@@ -63,5 +63,14 @@ getEmpleado(id)
             })
             .catch(err=>console.log(err))
     })
-    .catch(err=>console.log(err))
+    .catch(err=>console.log(err))*/
 
+//forma mas facil de hacerlo- promesas encadenadas
+let nombre
+getEmpleado(id)
+    .then(empleado=>{
+        nombre = empleado
+        return getSalario(id)
+    })
+    .then(salario => console.log(`El empleado ${nombre} tiene salario de ${salario}`))
+    .catch(err=>console.log(err))
