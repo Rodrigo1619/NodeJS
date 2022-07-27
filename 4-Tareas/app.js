@@ -1,7 +1,7 @@
 require('colors');
 
 
-const { mostrarMenu } = require('./helpers/mensajes');
+const { mostrarMenu, pausa } = require('./helpers/mensajes');
 
 
 console.clear()
@@ -9,6 +9,7 @@ console.clear()
 const main = async()=>{
     console.log('hola mundo');
     mostrarMenu();
+    //pausa();
 }
 
 main();
