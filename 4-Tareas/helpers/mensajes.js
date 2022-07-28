@@ -1,6 +1,6 @@
 const { resolve } = require('path');
 
-require('colors');
+import colors from 'colors'
 
 const mostrarMenu = ()=>{
 
@@ -41,7 +41,7 @@ const pausa = ()=>{
         })
     })
 }
-module.exports ={
+export{
     mostrarMenu,
     pausa
 }
