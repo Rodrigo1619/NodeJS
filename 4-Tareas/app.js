@@ -1,4 +1,5 @@
 import colors from 'colors';
+import { guardarDB } from './helpers/guardarArchivo.js';
 import {inquirerMenu, inquirerPausa, leerInput} from './helpers/inquirer.js'; 
 import Tarea from './models/tarea.js';
 import Tareas from './models/tareas.js';
@@ -25,10 +26,11 @@ const main = async()=>{
                 break;
         }
 
-
+        //guardarDB(tareas.listadoArr) //estamos guardando el arreglo de la lista de tareas
         if(opt !=='0') await inquirerPausa(); //para que el programa cierre de una sola vez
 
     } while (opt !== '0'); //se ejecutara media vez la opcion sea diferente de 0
+
 
 }
 
