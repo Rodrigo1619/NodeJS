@@ -1,5 +1,6 @@
 import inquirer from 'inquirer';
 import colors from 'colors';
+import Tareas from '../models/tareas.js';
 
 const preguntas = [
     {
@@ -79,8 +80,74 @@ const leerInput = async(message)=>{        //al poner message a la hora de poner
     const {desc} = await inquirer.prompt(question)
     return desc
 }
+
+const listadoTareasBorrar = async(tareas = [])=>{
+    //creando nuevo arreglo para no modificar el original
+    const choices = tareas.map((tarea, i) =>{
+        const idx = `${i+1}.`.green
+        return{
+            value: tarea.id,
+            name: `${idx} ${tarea.descripcion}`
+
+        }
+    })
+    //agregando opcion de cancelar por si el usuario no quiere eliminar una tarea
+    choices.unshift({
+        value: '0',
+         name: `${'0.'.green} Cancelar`
+    })
+    //arreglo para poder seleccionar en el nuevo menu de borrar
+    const preguntas = [
+        {
+            type: 'list',
+            name: 'id',
+            message: 'borrar',
+            choices
+        }
+    ]
+    const {id} = await inquirer.prompt(preguntas)
+    return id 
+}
+const confirmar = async(message)=>{
+    const question = [
+        {
+            type: 'confirm',
+            name: 'ok',
+            message
+        }
+    ]
+    const {ok} = await inquirer.prompt(question)
+    return ok
+
+}
+const mostrarListadoChecklList = async(tareas = [])=>{
+    //creando nuevo arreglo para no modificar el original
+    const choices = tareas.map((tarea, i) =>{
+        const idx = `${i+1}.`.green
+        return{
+            value: tarea.id,
+            name: `${idx} ${tarea.descripcion}`,
+            checked: (tarea.completadoEn)? true : false
+        }
+    })
+    
+    //arreglo para poder seleccionar en el nuevo menu de borrar
+    const pregunta = [
+        {
+            type: 'checkbox',
+            name: 'ids',
+            message: 'Selecciones',
+            choices
+        }
+    ]
+    const {ids} = await inquirer.prompt(pregunta)
+    return ids
+}
 export{
     inquirerMenu,
     inquirerPausa,
-    leerInput
+    leerInput,
+    listadoTareasBorrar,
+    confirmar,
+    mostrarListadoChecklList
 }
