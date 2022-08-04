@@ -3,7 +3,7 @@ import Busqueda from "./models/busqueda.js";
 
 const main = async()=>{
     let opt = '';
-    const busqueda = new Busqueda();
+    const busquedas = new Busqueda();
     do {
         opt = await inquirerMenu();
         switch(opt){
@@ -11,7 +11,7 @@ const main = async()=>{
 
                 //Mostrar mensaje
                 const lugar = await leerInput('Ciudad: ');
-                console.log(lugar);
+                await busquedas.ciudad(lugar)
 
 
 
