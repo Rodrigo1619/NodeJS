@@ -83,6 +83,8 @@ class Busqueda{
         if(this.historial.includes(lugar.toLocaleLowerCase())){
             return; //solo retorna porque no tiene que grabar nada
         }
+        //que solo sean 6 en el historial
+        this.historial = this.historial.splice(0,5)
         //TODO: prevenir duplicidad
         this.historial.unshift(lugar.toLocaleLowerCase())
 
