@@ -63,11 +63,36 @@ const leerInput = async( message ) => {
     const { desc } = await inquirer.prompt(question);
     return desc;
 }
+const listarLugares = async(lugares = [])=>{
+    const choices = lugares.map((lugar, i)=>{
+        const idx = `${i+1}.`.green; //generando el indice, osea la lista de numeros
 
+        return{
+            value: lugar.id,
+            name: `${idx} ${lugar.nombre}`
+        }
+    })
+    //Posicionandolo al inicio del menu
+    choices.unshift({
+        value: '0',
+        name: '0.'.green + 'Cancelar'
+    })
+    const preguntas = [
+        {
+            type: 'list',
+            name: 'id',
+            message: 'Seleccione Lugar: ',
+            choices
+        }
+    ]
+    const {id} = await inquirer.prompt(preguntas);
+    return id;
+}
 
 export{
     inquirerMenu,
     inquirerPausa,
-    leerInput
+    leerInput,
+    listarLugares
     
 }

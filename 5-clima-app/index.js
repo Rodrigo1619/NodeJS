@@ -1,4 +1,5 @@
-import { inquirerMenu, inquirerPausa, leerInput} from "./helpers/inquirer.js";
+import 'dotenv/config'
+import { inquirerMenu, inquirerPausa, leerInput, listarLugares} from "./helpers/inquirer.js";
 import Busqueda from "./models/busqueda.js";
 
 const main = async()=>{
@@ -10,16 +11,17 @@ const main = async()=>{
             case 1:
 
                 //Mostrar mensaje
-                const lugar = await leerInput('Ciudad: ');
-                await busquedas.ciudad(lugar)
-
-
-
-
+                const termino = await leerInput('Ciudad: ');
+                //Buscar lugares
+                const lugares = await busquedas.ciudad(termino) //termino de busqueda
+                //Seleccionar el lugar
+                const idSeleccionado = await listarLugares(lugares);
+                const lugarSel = lugares.find(l=> l.id === idSeleccionado)
+                
                 console.log('\n Información de la ciudad\n'.green)
-                console.log('Ciudad:')
-                console.log('Latitud:')
-                console.log('Longitud:')
+                console.log('Ciudad:', lugarSel.nombre)
+                console.log('Latitud:', lugarSel.latitud)
+                console.log('Longitud:', lugarSel.longitud)
                 console.log('Temperatura:')
                 console.log('Minima:')
                 console.log('Maxima:')

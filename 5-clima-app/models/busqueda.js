@@ -9,7 +9,7 @@ class Busqueda{
 
     get paramsMapbox(){
         return {     
-            'access_token': 'pk.eyJ1Ijoicm9kcmljazE2IiwiYSI6ImNsNmZveTdvaTAzMm8zanM1bGp2ZzhicDIifQ.5-JgXdqHa0J97W5Mb5yKrA',
+            'access_token': process.env.MAPBOX_KEY, //literal se esta usando el token desde el .env
             'limit': 5,
             'language': 'es'
         }
@@ -26,8 +26,14 @@ class Busqueda{
                 params: this.paramsMapbox
             })
             const resp = await instance.get();
-            console.log(resp.data)
-            return[]; //retornar lugares que sean iguales a los que el usuario metio
+
+            //de donde se extraera la informacion
+            return resp.data.features.map(lugar => ({
+                id: lugar.id,
+                nombre: lugar.place_name,
+                longitud: lugar.center[0] , //es un arreglo y nos interesa la primera posicion
+                latitud: lugar.center[1] //lo mismo, es un arreglo compartido y nos interesa la segunda posicion
+            }))
             
         } catch (error) {
             return []
