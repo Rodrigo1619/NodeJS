@@ -1,8 +1,13 @@
-import http from 'http'
+import express from 'express'
+const app = express()
+const port = 8080
 
-http.createServer((req, res)=>{
-    res.write('ola camaron sin cola');
-    res.end();
+app.get('/', (req, res)=> {
+    res.send('ola camaron')
 })
-.listen(8080)
-console.log('escuchando en el puerto', 8080)
+app.get('*', (req, res)=> {
+    res.send('404 pagina no encontrada')
+})
+app.listen(port, ()=>{
+    console.log(`Corriendo en ${port}`)
+})
