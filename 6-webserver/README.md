@@ -56,3 +56,21 @@ app.get('*',  (req, res)=> {
 })
 ```
 En express podemos poner ese comodin, osea el * para que si el usuario se va a una ruta inexistente llegue a ese ruta predefinida, se puede ver como un **if else**
+
+# Directorio public
+En el curso sale una manera "antigua" de hacerla, pero en este caso se pudo resolver haciendo uso del path de la siguiente manera.
+```
+import path, { join } from 'path'
+const __dirname = path.resolve()
+app.get('*', (req, res)=> {
+    res.sendFile(path.join(__dirname + '/public/404.html'))
+})
+```
+## Forma antigua
+```
+app.get('*', (req, res)=> {
+    res.sendFile(__dirname + '/public/404.html')
+})
+```
+El error que sale es que __dirname no esta definido.
+Por lo tanto se tiene que recurrir a las importaciones del path como se observa en el caso anterior
