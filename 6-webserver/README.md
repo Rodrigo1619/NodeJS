@@ -74,3 +74,27 @@ app.get('*', (req, res)=> {
 ```
 El error que sale es que __dirname no esta definido.
 Por lo tanto se tiene que recurrir a las importaciones del path como se observa en el caso anterior
+
+# Render
+Se puede "atrapar" cosas del controller en la vista
+### app.js
+```
+app.get('/',(req, res)=>{
+    res.render('home',{
+        nombre: 'Rodrigo',
+        titulo: 'curso de node'
+    })
+})
+```
+### home.hbs 
+ahi solamente podemos mandar a llamar caracteristicas de un objeto, metiendolo en doble llaves
+```
+<html>
+	<head>
+		<title>{{titulo}} </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+```
+y el resultado de eso seria curso de node que es el que le pusimos al titulo en el controller

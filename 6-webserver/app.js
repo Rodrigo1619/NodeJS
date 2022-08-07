@@ -16,7 +16,10 @@ app.use(express.static('public'))
     res.send('camaron')
 })*/
 app.get('/',(req, res)=>{
-    res.render('home')
+    res.render('home',{
+        nombre: 'Rodrigo',
+        titulo: 'curso de node'
+    })
 })
 app.get('/generic',(req, res)=>{
     res.sendFile(path.join(__dirname + '/public/generic.html'))
