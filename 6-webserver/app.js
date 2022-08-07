@@ -1,10 +1,13 @@
 import express from 'express'
 import path, { join } from 'path'
+import hbs from 'hbs'
 const app = express()
 const port = 8080
 const __dirname = path.resolve()
 
+//handlebars
 app.set('view engine', 'hbs')
+hbs.registerPartials(path.join(__dirname + '/views/partials'));
 
 // Servir contenido estatico
 app.use(express.static('public'))
@@ -22,10 +25,18 @@ app.get('/',(req, res)=>{
     })
 })
 app.get('/generic',(req, res)=>{
-    res.sendFile(path.join(__dirname + '/public/generic.html'))
+    //res.sendFile(path.join(__dirname + '/public/generic.html'))
+    res.render('generic',{
+        nombre:'Rodrigo',
+        titulo: 'curso de node'
+    })
 })
 app.get('/elements',(req, res)=>{
-    res.sendFile(path.join(__dirname + '/public/elements.html'))
+    //res.sendFile(path.join(__dirname + '/public/elements.html'))
+    res.render('elements',{
+        nombre: 'Rodrigo',
+        titulo: 'curso de node'
+    })
 })
 
 app.get('*', (req, res)=> {

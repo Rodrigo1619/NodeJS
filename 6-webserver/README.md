@@ -98,3 +98,8 @@ ahi solamente podemos mandar a llamar caracteristicas de un objeto, metiendolo e
 	</head>
 ```
 y el resultado de eso seria curso de node que es el que le pusimos al titulo en el controller
+
+# Creacion de más archivos
+Creamos un directorio llamado partials y adentro creamos un archivo con el nombre que deseamos y en el home.hbs mandamos a llamarlo con ``` {{> nombreArchivo}}```
+# Reinicio
+Si al hacer cambios la pagina web tira un error, solamente bajamos el servidor y lo volvemos a ejecutar debido a que node solo acepta los cambios de .js 
