@@ -1,8 +1,11 @@
 import express from 'express'
 import path, { join } from 'path'
 import hbs from 'hbs'
+import 'dotenv/config'
+
+
 const app = express()
-const port = 8080
+const port = process.env.PORT
 const __dirname = path.resolve()
 
 //handlebars
