@@ -1,11 +1,14 @@
-import express from 'express';
+//imports de terceros
 import 'dotenv/config'
-const app = express();
 
-app.get('/', (req,res)=>{
-    res.send('Ola');
-});
-app.listen(process.env.PORT, ()=>{
-    console.log('Servidor corriendo en el puerto ', process.env.PORT);
-})
+//nuestros propios imports
+import Server from './models/server.js'
+
+//instanciando la clase de Server
+const server = new Server();
+
+server.listen();//haciendo que el servidor escuche
+
+
+
 
