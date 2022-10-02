@@ -16,3 +16,6 @@ Quedando nuestro package json inicial de la siguiente manera
 
 # configurar el .env
 Se usara para el puerto 8080
+
+# ¿Qué es middleware?
+Los middlewares no son más que funciones que añadiran más funcionalidades a nuestro web server o en otras palabras es una función que siempre va a ejecutarse siempre que levantemos nuestro servidor
