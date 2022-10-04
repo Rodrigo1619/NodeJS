@@ -1,9 +1,15 @@
-import {response} from 'express';
+import {request,response} from 'express';
 
-const usuariosGet = (req,res = response)=>{
+const usuariosGet = (req=request,res = response)=>{
+    const {q, nombre = 'no name', apikey, page=1, limit} = req.query;//para extraer la info del params pero que es opcional, los que van despues del ?
     //res.send('Ola camaron sin cola'); cambiamos el send por json para no mandar un html sino un archivo en formato json se hace la peticion en postman con la url
     res.json({
-        msg: 'get API - controller'
+        msg: 'get API - controller',
+        q,
+        nombre,
+        apikey,
+        page,
+        limit
     });
 }
 const usuariosPost = (req,res = response)=>{
@@ -19,8 +25,10 @@ const usuariosPost = (req,res = response)=>{
     });
 }
 const usuariosPut = (req,res=response)=>{  
+    const {id} = req.params
     res.json({
         msg: 'put API - controller',
+        id
     });
 }
 const usuariosPatch = (req,res = response)=>{
