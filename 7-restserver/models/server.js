@@ -23,6 +23,9 @@ class Server{
 
         //Cors
         this.app.use(cors());
+
+        //lectura y parseo del body
+        this.app.use(express.json())
     }
     //creamos el metodo para las rutas
     routes(){

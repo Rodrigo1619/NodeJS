@@ -7,13 +7,20 @@ const usuariosGet = (req,res = response)=>{
     });
 }
 const usuariosPost = (req,res = response)=>{
+
+    //extraer el body
+    //const body = req.body; forma normal
+    //destructurando
+    const {nombre, edad} = req.body
     res.json({
-        msg: 'post API - controller'
+        msg: 'post API - controller',
+        nombre,
+        edad
     });
 }
 const usuariosPut = (req,res=response)=>{  
     res.json({
-        msg: 'put API - controller'
+        msg: 'put API - controller',
     });
 }
 const usuariosPatch = (req,res = response)=>{

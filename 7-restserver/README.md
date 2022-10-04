@@ -54,3 +54,6 @@ Es lo que nos ayuda a proteger nuestro server de forma "superficial"
             });
         });
 ```
+
+# Acciones en postman
+Para hacer las "comunicaciones" con el post, se selecciona el endpoint en tipo POST, de ahi nos vamos a body y en body seleccionamos raw y elegimos JSON
