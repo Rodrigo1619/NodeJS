@@ -22,3 +22,35 @@ Los middlewares no son más que funciones que añadiran más funcionalidades a n
 
 # Cors
 Es lo que nos ayuda a proteger nuestro server de forma "superficial"
+
+# Version anterior de los routes cuando estaban en server.js
+```
+//el app.get no existe, pero tenemos acceso al this.app.get 
+        //debemos cambiar el ('/') porque el middleware ya lo esta usando
+        this.app.get('/camaron', (req,res)=>{
+            //res.send('Ola camaron sin cola'); cambiamos el send por json para no mandar un html sino un archivo en formato json se hace la peticion en postman con la url
+            res.json({
+                msg: 'get API'
+            });
+        });
+        this.app.put('/camaron', (req,res)=>{  
+            res.json({
+                msg: 'put API'
+            });
+        });
+        this.app.post('/camaron', (req,res)=>{
+            res.json({
+                msg: 'post API'
+            });
+        });
+        this.app.delete('/camaron', (req,res)=>{
+            res.json({
+                msg: 'delete API'
+            });
+        });
+        this.app.patch('/camaron', (req,res)=>{
+            res.json({
+                msg: 'patch API'
+            });
+        });
+```
