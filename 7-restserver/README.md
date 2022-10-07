@@ -57,3 +57,6 @@ Es lo que nos ayuda a proteger nuestro server de forma "superficial"
 
 # Acciones en postman
 Para hacer las "comunicaciones" con el post, se selecciona el endpoint en tipo POST, de ahi nos vamos a body y en body seleccionamos raw y elegimos JSON
+
+# ¿Qué es mongoose?
+Mongoose es una librería para Node.js que nos permite escribir consultas para una base de datos de MongooDB, con características como validaciones, construcción de queries, middlewares, conversión de tipos y algunas otras, que enriquecen la funcionalidad de la base de datos.

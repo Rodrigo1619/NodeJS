@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import {router} from '../routes/usuario.route.js'
+import { DBConnection } from '../database/config.js';
 //clase para poder que nuestra app de express este trabajando en una carpeta diferende del app.js
 class Server{
     constructor(){
@@ -9,11 +10,20 @@ class Server{
         this.port = process.env.PORT;
         this.usuariosPath = '/camaron/usuarios';
 
+        //Conectando a la base de datos
+        this.connectDB();
+
         //Middelwares
         this.middlewares();
         //Rutas
         //mandamos a llamar el metodo de routes
         this.routes();
+    }
+
+    //-------------------------------------METODOS-------------------------------------
+    //Creando metodo para la DB, el metodo debe ser asincrono
+    async connectDB(){
+        await DBConnection();
     }
     //creando nuestros middlewares
     middlewares(){
