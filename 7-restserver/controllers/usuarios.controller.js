@@ -1,4 +1,5 @@
 import {request,response} from 'express';
+import Usuario from '../models/usuario.js'
 
 const usuariosGet = (req=request,res = response)=>{
     const {q, nombre = 'no name', apikey, page=1, limit} = req.query;//para extraer la info del params pero que es opcional, los que van despues del ?
@@ -12,16 +13,16 @@ const usuariosGet = (req=request,res = response)=>{
         limit
     });
 }
-const usuariosPost = (req,res = response)=>{
+const usuariosPost = async(req,res = response)=>{
 
-    //extraer el body
-    //const body = req.body; forma normal
-    //destructurando
-    const {nombre, edad} = req.body
+    //extraer el body //const body = req.body; forma normal
+    //const {nombre, edad} = req.body //con desestructuracion
+    const body = req.body
+    const usuario = new Usuario(body); //instanciamos un nuevo usuario
+    await usuario.save(); //esto hace que se guarde en la base de datos de mondongo
     res.json({
-        msg: 'post API - controller',
-        nombre,
-        edad
+        //msg: 'post API - controller',
+        usuario
     });
 }
 const usuariosPut = (req,res=response)=>{  

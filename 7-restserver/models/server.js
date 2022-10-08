@@ -8,7 +8,7 @@ class Server{
         //delcarando las variables
         this.app = express();
         this.port = process.env.PORT;
-        this.usuariosPath = '/camaron/usuarios';
+        this.usuariosPath = '/api/usuarios';
 
         //Conectando a la base de datos
         this.connectDB();
