@@ -1,5 +1,6 @@
 import {request,response} from 'express';
-import Usuario from '../models/usuario.js'
+import bcryptjs from 'bcryptjs';
+import Usuario from '../models/usuario.js';
 
 const usuariosGet = (req=request,res = response)=>{
     const {q, nombre = 'no name', apikey, page=1, limit} = req.query;//para extraer la info del params pero que es opcional, los que van despues del ?
@@ -17,9 +18,18 @@ const usuariosPost = async(req,res = response)=>{
 
     //extraer el body //const body = req.body; forma normal
     //const {nombre, edad} = req.body //con desestructuracion
-    const body = req.body
-    const usuario = new Usuario(body); //instanciamos un nuevo usuario
-    await usuario.save(); //esto hace que se guarde en la base de datos de mondongo
+    const {nombre, correo, contraseña, rol} = req.body
+    const usuario = new Usuario({nombre, correo, contraseña, rol}); //instanciamos un nuevo usuario
+
+    //verificando que el correo existe
+
+    //encriptando contraseña
+    const salt = bcryptjs.genSaltSync(); //es cuantas vueltas le queremos dar a la contraseña para que sea dificil descencriptarla, por defecto esta en 10
+    usuario.contraseña = bcryptjs.hashSync(contraseña, salt) //nos pide la contraseña y el numero de saltos
+
+    //esto hace que se guarde en la base de datos de mondongo
+    await usuario.save(); 
+
     res.json({
         //msg: 'post API - controller',
         usuario
