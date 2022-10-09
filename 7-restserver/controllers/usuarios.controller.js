@@ -1,5 +1,6 @@
 import {request,response} from 'express';
 import bcryptjs from 'bcryptjs';
+import { validationResult } from 'express-validator';
 import Usuario from '../models/usuario.js';
 
 const usuariosGet = (req=request,res = response)=>{
@@ -20,8 +21,19 @@ const usuariosPost = async(req,res = response)=>{
     //const {nombre, edad} = req.body //con desestructuracion
     const {nombre, correo, contraseña, rol} = req.body
     const usuario = new Usuario({nombre, correo, contraseña, rol}); //instanciamos un nuevo usuario
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()){
+        return res.status(400).json(errors);
+    }
 
     //verificando que el correo existe
+    const emailExistente = await Usuario.findOne({correo}) //encuentra si un correo se repite de los que el usuario mande
+    if(emailExistente){
+        return res.status(400).json({
+            msg: 'Correo existente, intenta con otro correo'
+        })
+    }
 
     //encriptando contraseña
     const salt = bcryptjs.genSaltSync(); //es cuantas vueltas le queremos dar a la contraseña para que sea dificil descencriptarla, por defecto esta en 10

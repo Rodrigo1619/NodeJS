@@ -1,3 +1,10 @@
+# Paquetes instalados
+* "bcryptjs"
+"cors"
+* "dotenv"
+* "express"
+* "express-validator"
+* "mongoose"
 # No olvidar
 Ahora se utiliza el import y no require, entonces para que esto agarrre debemos ir al package.json y 
 escribir lo siguiente en el primer corchete
@@ -60,3 +67,6 @@ Para hacer las "comunicaciones" con el post, se selecciona el endpoint en tipo P
 
 # ¿Qué es mongoose?
 Mongoose es una librería para Node.js que nos permite escribir consultas para una base de datos de MongooDB, con características como validaciones, construcción de queries, middlewares, conversión de tipos y algunas otras, que enriquecen la funcionalidad de la base de datos.
+
+# Paquete para validar correos
+npm i express-validator
