@@ -2,6 +2,7 @@ import {Router} from 'express';
 import { check } from 'express-validator';
 import { usuariosGet, usuariosPost, usuariosPut, usuariosPatch, usuariosDelete } from '../controllers/usuarios.controller.js';
 import { validarCampos } from '../middlewares/validar-campos.js';
+import Role from '../models/role.model.js'
 
 export const router = Router();
  
@@ -13,7 +14,13 @@ export const router = Router();
                 check('nombre', 'El nombre es obligatorio').not().isEmpty(),
                 check('contraseña', 'La contraseña debe ser mayor a 6 caracteres').isLength({ min: 6}),
                 check('correo', 'Correo invalido').isEmail(),        
-                check('rol', 'Este rol no existe').isIn(['ADMIN_ROL', 'USUARIO_ROL']),
+                //check('rol', 'Este rol no existe').isIn(['ADMIN_ROL', 'USUARIO_ROL']),//ya no se hara de esta forma, lo validaremos desde la base de datos
+                check('rol').custom(async(rol = '')=>{
+                        const existeRol = await Role.findOne({rol})
+                        if(!existeRol){
+                                throw new Error(`El rol ${rol} no esta registrado en la base de datos`)
+                        }
+                }),
                 validarCampos //si este mw pasa, se ejecutara la funcion de post, de lo contrario no
         ],usuariosPost);
         router.put('/:id', usuariosPut); //se le pone :nombreQueLeQueremosDar en este caso id

@@ -70,3 +70,9 @@ Mongoose es una librería para Node.js que nos permite escribir consultas para u
 
 # Paquete para validar correos
 npm i express-validator
+
+# Crear roles mediante mondongo
+* Ir a nuestra base de datos (DBCAFE)
+* Crear nueva coleccion
+* Para agregar los roles le damos en add data
+Luego creamos un nuevo modelo y el archivo debe de llamarse como lo pusimos en la base de datos solo que en singular
