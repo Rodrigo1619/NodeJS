@@ -1,6 +1,5 @@
 import {request,response} from 'express';
 import bcryptjs from 'bcryptjs';
-import { validationResult } from 'express-validator';
 import Usuario from '../models/usuario.model.js';
 
 const usuariosGet = (req=request,res = response)=>{
@@ -21,11 +20,7 @@ const usuariosPost = async(req,res = response)=>{
     //const {nombre, edad} = req.body //con desestructuracion
     const {nombre, correo, contraseña, rol} = req.body
     const usuario = new Usuario({nombre, correo, contraseña, rol}); //instanciamos un nuevo usuario
-    const errors = validationResult(req)
-
-    if(!errors.isEmpty()){
-        return res.status(400).json(errors);
-    }
+    
 
     //verificando que el correo existe
     const emailExistente = await Usuario.findOne({correo}) //encuentra si un correo se repite de los que el usuario mande
