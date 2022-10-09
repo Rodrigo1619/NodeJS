@@ -1,7 +1,7 @@
 import {request,response} from 'express';
 import bcryptjs from 'bcryptjs';
 import { validationResult } from 'express-validator';
-import Usuario from '../models/usuario.js';
+import Usuario from '../models/usuario.model.js';
 
 const usuariosGet = (req=request,res = response)=>{
     const {q, nombre = 'no name', apikey, page=1, limit} = req.query;//para extraer la info del params pero que es opcional, los que van despues del ?

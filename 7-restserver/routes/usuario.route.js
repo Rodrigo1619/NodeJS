@@ -8,7 +8,12 @@ export const router = Router();
         router.get('/', usuariosGet );
         //si se mandan solo 2 argumentos se entiende que es ruta y controlador pero si se mandan 3 se entiende que el de en medio es el middleware y se manda como un arreglo
         //el check es para validar que sea y tenga la forma de un correo, para no estar haciendo el monton de expresiones regulares y tener mas limpio el codigo
-        router.post('/',[check('correo', 'Correo invalido').isEmail()] ,usuariosPost);
+        router.post('/',[
+                check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+                check('contraseña', 'La contraseña debe ser mayor a 6 caracteres').isLength({ min: 6}),
+                check('correo', 'Correo invalido').isEmail(),        
+                check('rol', 'Este rol no existe').isIn(['ADMIN_ROL', 'USUARIO_ROL'])        
+        ],usuariosPost);
         router.put('/:id', usuariosPut); //se le pone :nombreQueLeQueremosDar en este caso id
         router.patch('/', usuariosPatch);
         router.delete('/', usuariosDelete);
