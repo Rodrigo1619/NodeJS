@@ -21,15 +21,6 @@ const usuariosPost = async(req,res = response)=>{
     const {nombre, correo, contraseña, rol} = req.body
     const usuario = new Usuario({nombre, correo, contraseña, rol}); //instanciamos un nuevo usuario
     
-
-    //verificando que el correo existe
-    const emailExistente = await Usuario.findOne({correo}) //encuentra si un correo se repite de los que el usuario mande
-    if(emailExistente){
-        return res.status(400).json({
-            msg: 'Correo existente, intenta con otro correo'
-        })
-    }
-
     //encriptando contraseña
     const salt = bcryptjs.genSaltSync(); //es cuantas vueltas le queremos dar a la contraseña para que sea dificil descencriptarla, por defecto esta en 10
     usuario.contraseña = bcryptjs.hashSync(contraseña, salt) //nos pide la contraseña y el numero de saltos
