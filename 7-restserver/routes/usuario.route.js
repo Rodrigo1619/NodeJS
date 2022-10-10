@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import { check } from 'express-validator';
 import { usuariosGet, usuariosPost, usuariosPut, usuariosPatch, usuariosDelete } from '../controllers/usuarios.controller.js';
-import { esRolValido, emailExiste } from '../helpers/db-validators.js';
+import { esRolValido, emailExiste, existeUsuarioId } from '../helpers/db-validators.js';
 import { validarCampos } from '../middlewares/validar-campos.js';
 
 
@@ -22,7 +22,12 @@ export const router = Router();
                 validarCampos //si este mw pasa, se ejecutara la funcion de post, de lo contrario no
         ],usuariosPost);
 
-        router.put('/:id', usuariosPut); //se le pone :nombreQueLeQueremosDar en este caso id
+        router.put('/:id',[
+                check('id', 'No es un ID válido').isMongoId(),
+                check('id').custom(existeUsuarioId),
+                check('rol').custom(esRolValido), //para que nos mande un rol valido de la base de datos
+                validarCampos //siempre se debe de poner para evitar los errores
+        ], usuariosPut); //se le pone :nombreQueLeQueremosDar en este caso id
 
         router.patch('/', usuariosPatch);
         

@@ -35,9 +35,9 @@ const usuariosPost = async(req,res = response)=>{
 }
 const usuariosPut = async(req,res=response)=>{  
     const {id} = req.params;
-    const {contraseña, google,correo, ...restoInfo} = req.body; //extrayendo la info que no queremos que vea el usuario
+    const {_id, contraseña, google,correo, ...restoInfo} = req.body; //extrayendo la info que no queremos que vea el usuario
 
-    //todo: validar contra la base de datos
+    //validar contra la base de datos
     if(contraseña){ 
         //encriptando contraseña
         const salt = bcryptjs.genSaltSync(); //es cuantas vueltas le queremos dar a la contraseña para que sea dificil descencriptarla, por defecto esta en 10
@@ -49,6 +49,7 @@ const usuariosPut = async(req,res=response)=>{
         usuario
     });
 }
+
 const usuariosPatch = (req,res = response)=>{
     res.json({
         msg: 'patch API'

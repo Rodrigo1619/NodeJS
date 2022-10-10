@@ -80,3 +80,6 @@ Luego creamos un nuevo modelo y el archivo debe de llamarse como lo pusimos en l
 # PUT
 Para mandar un put en postman mediante la url es de la siguiente manera 
 {{url}}/api/usuarios/12, teniendo ese numero como el id y la url se entiende que ya sea de desarrollo o produccion
+
+# Posible error en el router del put
+Se debe de mandar un ObjectId valido de mondongo, ya que si Si nuestro es id es 606e555cc3ce9207f50a2a95 y le agregamos una letra o numero nos lanza el cast error pero si cambiamos el 5 por una A nos va a lanzar el error que estamos programando o sea "El id no existe", razon? ño se
