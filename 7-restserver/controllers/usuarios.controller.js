@@ -33,11 +33,20 @@ const usuariosPost = async(req,res = response)=>{
         usuario
     });
 }
-const usuariosPut = (req,res=response)=>{  
-    const {id} = req.params
+const usuariosPut = async(req,res=response)=>{  
+    const {id} = req.params;
+    const {contraseña, google,correo, ...restoInfo} = req.body; //extrayendo la info que no queremos que vea el usuario
+
+    //todo: validar contra la base de datos
+    if(contraseña){ 
+        //encriptando contraseña
+        const salt = bcryptjs.genSaltSync(); //es cuantas vueltas le queremos dar a la contraseña para que sea dificil descencriptarla, por defecto esta en 10
+        restoInfo.contraseña = bcryptjs.hashSync(contraseña, salt) //nos pide la contraseña y el numero de saltos
+    }
+    const usuario = await Usuario.findByIdAndUpdate(id, restoInfo) //el resto de info. es lo que se actualizara
     res.json({
         msg: 'put API - controller',
-        id
+        usuario
     });
 }
 const usuariosPatch = (req,res = response)=>{

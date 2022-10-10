@@ -76,3 +76,7 @@ npm i express-validator
 * Crear nueva coleccion
 * Para agregar los roles le damos en add data
 Luego creamos un nuevo modelo y el archivo debe de llamarse como lo pusimos en la base de datos solo que en singular
+
+# PUT
+Para mandar un put en postman mediante la url es de la siguiente manera 
+{{url}}/api/usuarios/12, teniendo ese numero como el id y la url se entiende que ya sea de desarrollo o produccion
