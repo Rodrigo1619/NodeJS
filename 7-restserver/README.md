@@ -87,3 +87,17 @@ Se debe de mandar un ObjectId valido de mondongo, ya que si Si nuestro es id es 
 # Prueba para obtener usuario con el desde hasta con su limite
 {{url}}/api/usuarios?desde=5&limite=10
 esto se manda desde los parametros
+
+# Get antes de usar el Promise.all
+```
+/* Forma anterior antes del Promise.all
+    const usuarios = await Usuario.find(query)
+    .skip(desde)
+    .limit(limite) //asi no da error pero tambien si se trabaja en versiones anteriores se arregla con un .limit(Number(limite)) 
+    const total = await Usuario.countDocuments(query)
+    */
+    res.json({
+        //total,
+        //usuarios
+    });
+```
