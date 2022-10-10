@@ -2,16 +2,15 @@ import {request,response} from 'express';
 import bcryptjs from 'bcryptjs';
 import Usuario from '../models/usuario.model.js';
 
-const usuariosGet = (req=request,res = response)=>{
-    const {q, nombre = 'no name', apikey, page=1, limit} = req.query;//para extraer la info del params pero que es opcional, los que van despues del ?
+const usuariosGet = async(req=request,res = response)=>{
+    //const {q, nombre = 'no name', apikey, page=1, limit} = req.query;//para extraer la info del params pero que es opcional, los que van despues del ?
     //res.send('Ola camaron sin cola'); cambiamos el send por json para no mandar un html sino un archivo en formato json se hace la peticion en postman con la url
+    const {limite = 5, desde = 0} = req.query //por defecto mandaremos 5 usuarios
+    const usuarios = await Usuario.find()
+    .skip(desde)
+        .limit(limite) //asi no da error pero tambien si se trabaja en versiones anteriores se arregla con un .limit(Number(limite)) 
     res.json({
-        msg: 'get API - controller',
-        q,
-        nombre,
-        apikey,
-        page,
-        limit
+        usuarios
     });
 }
 const usuariosPost = async(req,res = response)=>{
@@ -44,10 +43,7 @@ const usuariosPut = async(req,res=response)=>{
         restoInfo.contraseña = bcryptjs.hashSync(contraseña, salt) //nos pide la contraseña y el numero de saltos
     }
     const usuario = await Usuario.findByIdAndUpdate(id, restoInfo) //el resto de info. es lo que se actualizara
-    res.json({
-        msg: 'put API - controller',
-        usuario
-    });
+    res.json(usuario);
 }
 
 const usuariosPatch = (req,res = response)=>{

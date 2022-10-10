@@ -83,3 +83,7 @@ Para mandar un put en postman mediante la url es de la siguiente manera
 
 # Posible error en el router del put
 Se debe de mandar un ObjectId valido de mondongo, ya que si Si nuestro es id es 606e555cc3ce9207f50a2a95 y le agregamos una letra o numero nos lanza el cast error pero si cambiamos el 5 por una A nos va a lanzar el error que estamos programando o sea "El id no existe", razon? ño se
+
+# Prueba para obtener usuario con el desde hasta con su limite
+{{url}}/api/usuarios?desde=5&limite=10
+esto se manda desde los parametros
