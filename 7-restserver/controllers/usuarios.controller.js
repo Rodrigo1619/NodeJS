@@ -58,10 +58,13 @@ const usuariosPatch = (req,res = response)=>{
         msg: 'patch API'
     });
 }
-const usuariosDelete = (req,res=response)=>{
-    res.json({
-        msg: 'delete API - controller'
-    });
+const usuariosDelete = async(req,res=response)=>{
+    const {id} = req.params
+    //borrar fisicamente, nunca hacerlo de esta forma, porque se elimina de la base de datos
+    //const usuario = await Usuario.findByIdAndDelete(id)
+
+    const usuario = await Usuario.findByIdAndUpdate(id, {estado:false})
+    res.json(usuario)
 }
 
 
